@@ -51,7 +51,6 @@ export const REMOVE_BOOK = gql`
         email
         bookCount
         savedBooks {
-            _id
             bookId
             authors
             description
