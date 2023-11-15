@@ -1,11 +1,24 @@
 const { User } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).select('-__v -password').populate('books');
+                try{
+                    console.log(context.user);
+                    const userData = await User.findOne({ _id: context.user._id })
+                    .select('-__v -password')
+                    .populate('savedBooks');
+
+                    console.log(userData);
+                    return userData;
+                } catch (err) {
+                    console.log("Error fetching user data.", err);
+                    throw new Error("An error occurred while fethcing user data.");
+                }
+
             } 
             throw new AuthenticationError('You are not logged in!');
         }, 
