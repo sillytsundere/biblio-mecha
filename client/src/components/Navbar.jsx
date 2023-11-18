@@ -18,8 +18,9 @@ const AppNavbar = () => {
             Google Books Search
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
-            <Nav className='ml-auto d-flex'>
+          <Navbar.Collapse id='navbar' className="justify-content-end">
+            <div className='d-flex flex-row-reverse'>
+              <Nav>
               <Nav.Link as={Link} to='/'>
                 Search For Books
               </Nav.Link>
@@ -35,6 +36,7 @@ const AppNavbar = () => {
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
               )}
             </Nav>
+            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>

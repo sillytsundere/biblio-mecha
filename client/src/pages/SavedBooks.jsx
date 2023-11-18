@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
 
-// import { getMe, deleteBook } from '../utils/API';
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 
@@ -10,37 +8,6 @@ import { REMOVE_BOOK } from "../utils/mutations";
 import { GET_ME } from "../utils/queries";
 
 const SavedBooks = () => {
-  // const [userData, setUserData] = useState({});
-
-  // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error('something went wrong!');
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
-  /////////////////////////
-  
   const { data } = useQuery(GET_ME);
   const userData = data?.me || {};
   console.log(data, "data", userData, "userData");
@@ -56,14 +23,6 @@ const SavedBooks = () => {
     }
 
     try {
-      // const response = await deleteBook(bookId, token);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const updatedUser = await response.json();
-      // setUserData(updatedUser);
       const response = await removeBook({ variables: { bookId } });
 
       // upon success, remove book's id from localStorage

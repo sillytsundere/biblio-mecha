@@ -26,10 +26,11 @@ const startApolloServer = async () => {
   await server.start();
 
   app.use(express.urlencoded({ extended: false }));
-  //why is the above false?
+
   app.use(express.json());
 
   app.use("/graphql", expressMiddleware(server, { context: authMiddleware }));
+  // app.use(routes);
 
   // if we're in production, serve client/build as static assets
   if (process.env.NODE_ENV === "production") {
@@ -52,4 +53,3 @@ const startApolloServer = async () => {
 // call the async function to start the server
 startApolloServer();
 
-// app.use(routes);
